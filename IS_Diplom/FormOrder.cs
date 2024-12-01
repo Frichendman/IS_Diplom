@@ -20,6 +20,10 @@ namespace IS_Diplom
             InitializeComponent();
         }
 
+
+        int idt;
+        double costt;
+
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -31,7 +35,7 @@ namespace IS_Diplom
             cmnd.Parameters.Add("@weght", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox4.Text);
             cmnd.Parameters.Add("@capacity", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox5.Text);
             cmnd.Parameters.Add("@amount", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox6.Text;
-            cmnd.Parameters.Add("@transport_id", NpgsqlTypes.NpgsqlDbType.Integer).Value = 1;
+            cmnd.Parameters.Add("@transport_id", NpgsqlTypes.NpgsqlDbType.Integer).Value = idt;
             //cmnd.Parameters.Add("@document", NpgsqlTypes.NpgsqlDbType.Bytea).Value = "NULL";
             cmnd.Parameters.Add("@status", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "Проверяется";
 
@@ -101,13 +105,66 @@ namespace IS_Diplom
             txtCheck();
         }
 
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            trnspChk();
+        }
 
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            trnspChk();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            trnspChk();
+        }
+
+        private void trnspChk()
+        {
+            if (checkBox1.Checked == true && textBox5.Text != String.Empty && textBox4.Text != String.Empty && comboBox1.Text != String.Empty)
+            {
+                SqlConnection db = new SqlConnection();
+                NpgsqlCommand cmnd = new NpgsqlCommand("SELECT id, name, cost From public.\"Transport\" Where type=@typ and weight = (select min(weight) from public.\"Transport\" where weight >= @weight and capacity = (select min(capacity) from public.\"Transport\" where capacity >= @cpct)) or capacity = (select min(capacity) from public.\"Transport\" where capacity >= @cpct  and weight = (select min(weight) from public.\"Transport\" where weight >= @weight));");
+                cmnd.Parameters.Add("@typ", NpgsqlTypes.NpgsqlDbType.Varchar).Value = comboBox1.Text;
+                cmnd.Parameters.Add("@weight", NpgsqlTypes.NpgsqlDbType.Double).Value = double.Parse(textBox4.Text);
+                cmnd.Parameters.Add("@cpct", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox5.Text);
+
+                db.openConn();
+                cmnd.Connection = db.getConnection();
+                NpgsqlDataReader dr = cmnd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    string namet;
+                    while (dr.Read())
+                    {
+                        idt = dr.GetFieldValue<int>(0);
+                        namet = dr.GetFieldValue<string>(1);
+                        textBox7.Text = namet;
+                        costt = dr.GetFieldValue<double>(2);
+                    }
+                   
+                    db.closeConn();
+                }
+                else
+                {
+                    MessageBox.Show("Произошла ошибка, повторите снова.");
+                    db.closeConn();
+                }
+
+            }
+        }
+        
         private void txtCheck()
         {
-            if (textBox9.Text != "" || textBox10.Text != "" || textBox11.Text != "" || textBox6.Text != "")
+            if (textBox9.Text != String.Empty && textBox10.Text != String.Empty && textBox11.Text != String.Empty && textBox6.Text != String.Empty)
             {
                 float c = count();
                 textBox5.Text = c.ToString();
+            }
+            else
+            {
+                return;
             }
         }
 
@@ -128,5 +185,9 @@ namespace IS_Diplom
             return cap;
         }
 
-    }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            trnspChk();
+        }
+    } 
 }

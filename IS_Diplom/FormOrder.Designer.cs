@@ -70,6 +70,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -235,6 +237,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(112, 21);
             this.comboBox1.TabIndex = 68;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox11
             // 
@@ -308,7 +311,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(649, 138);
+            this.label8.Location = new System.Drawing.Point(572, 128);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(61, 13);
             this.label8.TabIndex = 59;
@@ -334,9 +337,10 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(631, 154);
+            this.textBox7.Enabled = false;
+            this.textBox7.Location = new System.Drawing.Point(575, 154);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
+            this.textBox7.Size = new System.Drawing.Size(211, 20);
             this.textBox7.TabIndex = 56;
             // 
             // textBox6
@@ -354,6 +358,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
             this.textBox5.TabIndex = 54;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label5
             // 
@@ -414,6 +419,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(53, 20);
             this.textBox4.TabIndex = 47;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox2
             // 
@@ -439,12 +445,35 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(639, 128);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.TabIndex = 86;
+            this.checkBox1.Text = "Авто подбор";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(726, 124);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(62, 23);
+            this.button6.TabIndex = 87;
+            this.button6.TabStop = false;
+            this.button6.Text = "Выбор";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label20);
@@ -541,5 +570,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button6;
     }
 }
