@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using static IS_Diplom.TrnsChs;
 
 namespace IS_Diplom
 {
@@ -21,7 +23,7 @@ namespace IS_Diplom
         }
 
 
-        int idt;
+            int idt;
         double costt;
 
         private void button1_Click(object sender, EventArgs e)
@@ -188,6 +190,23 @@ namespace IS_Diplom
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             trnspChk();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == false && textBox5.Text != String.Empty && textBox4.Text != String.Empty && comboBox1.Text != String.Empty)
+            {
+                string a1 = comboBox1.Text;
+                double a2 = double.Parse(textBox4.Text);
+                int a3 = int.Parse(textBox5.Text);
+                TrnsChs fc = new TrnsChs(a1, a2, a3);
+                fc.ShowDialog();
+                idt = ReturnTrnsp.idtr;
+                costt = ReturnTrnsp.cst;
+                textBox7.Text = ReturnTrnsp.nm;
+
+            }
+            
         }
     } 
 }
