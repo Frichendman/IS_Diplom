@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using Npgsql;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -20,12 +21,33 @@ namespace IS_Diplom
         public FormOrder()
         {
             InitializeComponent();
+            Upd8();
         }
 
 
-        int idt;
-        byte[] file;
+        int idt,x1,y1;
+        byte[] file,file2;
         double costt;
+        string nm;
+
+        public void Upd8()
+        {
+            SqlConnection db = new SqlConnection();
+            db.openConn();
+            NpgsqlCommand cmnd = new NpgsqlCommand("Select \"Wp_numb\",\"Coord_name\",coord_x,coord_y,coord_coment from public.\"Waypoints\" where order_id is null", db.getConnection());
+            cmnd.Connection = db.getConnection();
+                NpgsqlDataReader dr = cmnd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dataGridView1.DataSource = dt;
+            }
+            
+            cmnd.Dispose();
+            db.closeConn();
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -58,15 +80,12 @@ namespace IS_Diplom
         private void button3_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            dialog.Filter = "Office Files|*.doc;*.docx|All files (*.*)|*.*";
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 String path = dialog.FileName;
-                using (StreamReader reader = new StreamReader(new FileStream(path, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
-                {
-                    var fileContent = reader.ReadToEnd();
-                };
+                file2 = File.ReadAllBytes(dialog.FileName);
                 this.richTextBox2.Text = path;
             }
         }
@@ -209,17 +228,83 @@ namespace IS_Diplom
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+            textBox3.Text = row.Cells["Coord_name"].Value.ToString();
+            textBox12.Text = row.Cells["coord_x"].Value.ToString();
+            textBox13.Text = row.Cells["coord_y"].Value.ToString();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            SqlConnection db = new SqlConnection();
+            NpgsqlCommand cmnd = new NpgsqlCommand("INSERT into public.\"Waypoints\" (\"Wp_numb\",\"Coord_name\",coord_x,coord_y,coord_file,coord_coment) values (@num,@name,@x,@y,@file,@comm)", db.getConnection());
+            cmnd.Parameters.Add("@num", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox14.Text);
+            cmnd.Parameters.Add("@name", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox3.Text;
+            cmnd.Parameters.Add("@x", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox12.Text);
+            cmnd.Parameters.Add("@y", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox13.Text);
+            if (richTextBox2.Text != "")
+            {
+                cmnd.Parameters.Add("@file", NpgsqlTypes.NpgsqlDbType.Bytea).Value = file2;
+            }
+            else {
+                cmnd.Parameters.Add("@file", NpgsqlTypes.NpgsqlDbType.Bytea).Value = DBNull.Value;
+            }
+            cmnd.Parameters.Add("@comm", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox8.Text;
 
+            db.openConn();
+            if (cmnd.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Точка поставленна сделан");              
+                db.closeConn();
+                textBox14.Text = "";
+                textBox3.Text = "";
+                textBox12.Text = "";
+                textBox13.Text = "";
+                textBox8.Text = "";
+                richTextBox2.Text = ""; 
+
+                Upd8();
+            }
+            else
+            {
+                MessageBox.Show("Произошла ошибка, повторите снова.");
+                textBox14.Text = "";
+                textBox3.Text = "";
+                textBox12.Text = "";
+                textBox13.Text = "";
+                textBox8.Text = "";
+                richTextBox2.Text = "";
+                db.closeConn();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            SqlConnection db = new SqlConnection();
+            NpgsqlCommand cmnd = new NpgsqlCommand("DELETE from public.\"Waypoints\" where order_id is NULL and \"Coord_name\"=@name and coord_x=@x and coord_y=@y", db.getConnection());
+            cmnd.Parameters.Add("@name", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox3.Text;
+            cmnd.Parameters.Add("@x", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox12.Text);
+            cmnd.Parameters.Add("@y", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox13.Text);
 
+            db.openConn();
+            if (cmnd.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Точка удаленна");
+                db.closeConn();
+                textBox3.Text = "";
+                textBox12.Text = "";
+                textBox13.Text = "";
+                Upd8();
+            }
+            else
+            {
+                MessageBox.Show("Произошла ошибка, повторите снова.");
+                db.closeConn();
+                textBox3.Text = "";
+                textBox12.Text = "";
+                textBox13.Text = "";
+                Upd8();
+            }
         }
     } 
 }

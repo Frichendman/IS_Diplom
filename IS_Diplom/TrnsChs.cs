@@ -37,6 +37,11 @@ namespace IS_Diplom
             public static double cst { get; set; }
         }
 
+        private void TrnsChs_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public void Upd8()
         {
             SqlConnection db = new SqlConnection();

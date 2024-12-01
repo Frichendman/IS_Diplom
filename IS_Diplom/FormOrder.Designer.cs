@@ -72,6 +72,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button6 = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBox14 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,7 +136,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(11, 206);
+            this.label16.Location = new System.Drawing.Point(11, 234);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(88, 13);
             this.label16.TabIndex = 79;
@@ -199,7 +201,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(2, 222);
+            this.textBox3.Location = new System.Drawing.Point(6, 250);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 71;
@@ -470,12 +472,30 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(11, 195);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(82, 13);
+            this.label21.TabIndex = 88;
+            this.label21.Text = "№ координаты";
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(25, 211);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(50, 20);
+            this.textBox14.TabIndex = 89;
+            // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox14);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button5);
@@ -576,5 +596,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox14;
     }
 }
