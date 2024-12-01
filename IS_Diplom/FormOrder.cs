@@ -23,14 +23,15 @@ namespace IS_Diplom
         }
 
 
-            int idt;
+        int idt;
+        byte[] file;
         double costt;
 
         private void button1_Click(object sender, EventArgs e)
         {
 
             SqlConnection db = new SqlConnection();
-            NpgsqlCommand cmnd = new NpgsqlCommand("INSERT into public.\"Order\" (name,name_prod,typ,weght,capacity,amount,transport_id,status) values (@name,@namep,@typ,@weght,@capacity,@amount,@transport_id,@status)", db.getConnection());
+            NpgsqlCommand cmnd = new NpgsqlCommand("INSERT into public.\"Order\" (name,name_prod,typ,weght,capacity,amount,transport_id,documents,status) values (@name,@namep,@typ,@weght,@capacity,@amount,@transport_id,@document,@status)", db.getConnection());
             cmnd.Parameters.Add("@name", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox1.Text;
             cmnd.Parameters.Add("@namep", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox2.Text;
             cmnd.Parameters.Add("@typ", NpgsqlTypes.NpgsqlDbType.Varchar).Value = comboBox1.Text;
@@ -38,7 +39,7 @@ namespace IS_Diplom
             cmnd.Parameters.Add("@capacity", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(textBox5.Text);
             cmnd.Parameters.Add("@amount", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox6.Text;
             cmnd.Parameters.Add("@transport_id", NpgsqlTypes.NpgsqlDbType.Integer).Value = idt;
-            //cmnd.Parameters.Add("@document", NpgsqlTypes.NpgsqlDbType.Bytea).Value = "NULL";
+            cmnd.Parameters.Add("@document", NpgsqlTypes.NpgsqlDbType.Bytea).Value = file;
             cmnd.Parameters.Add("@status", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "Проверяется";
 
             db.openConn();
@@ -74,15 +75,12 @@ namespace IS_Diplom
         {
 
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            dialog.Filter = "Office Files|*.doc;*.docx|All files (*.*)|*.*";
             dialog.Multiselect = false;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 String path = dialog.FileName;
-                using (StreamReader  reader = new StreamReader(new FileStream(path, FileMode.Open), new UTF8Encoding())) // do anything you want, e.g. read it
-                {
-                    var fileContent = reader.ReadToEnd();
-                };
+                file = File.ReadAllBytes(dialog.FileName);
                 this.richTextBox1.Text = path;
             }
         }
@@ -207,6 +205,21 @@ namespace IS_Diplom
 
             }
             
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     } 
 }
