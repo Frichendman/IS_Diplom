@@ -112,7 +112,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(139, 245);
+            this.label18.Location = new System.Drawing.Point(111, 260);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(48, 13);
             this.label18.TabIndex = 81;
@@ -121,7 +121,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(139, 206);
+            this.label17.Location = new System.Drawing.Point(111, 225);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(48, 13);
             this.label17.TabIndex = 80;
@@ -151,6 +151,7 @@
             this.button3.TabIndex = 77;
             this.button3.Text = "Выбрать файл";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // richTextBox2
             // 
@@ -168,6 +169,7 @@
             this.button2.TabIndex = 75;
             this.button2.Text = "Выбрать файл";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // richTextBox1
             // 
@@ -179,14 +181,14 @@
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(133, 257);
+            this.textBox13.Location = new System.Drawing.Point(160, 257);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(54, 20);
             this.textBox13.TabIndex = 73;
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(133, 222);
+            this.textBox12.Location = new System.Drawing.Point(160, 222);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(54, 20);
             this.textBox12.TabIndex = 72;
