@@ -28,8 +28,34 @@ namespace IS_Diplom
                         fc.Show();                  
                         this.Close();
                         break;
+                case "Adm":
+                        FormA fa = new FormA();
+                        fa.Show();
+                        this.Close();
+                        break;
+                case "Gruz1":
+                        FormGruz1 fg1= new FormGruz1();
+                        fg1.Show();
+                        this.Close();
+                        break;
+                case "Deliv":
+                        FormDeliv fd = new FormDeliv();
+                        fd.Show();
+                        this.Close();
+                        break;
+                case "Gruz2":
+                        FormGruz2 fg2 = new FormGruz2();
+                        fg2.Show();
+                        this.Close();
+                        break;
+                case "Pol":
+                        FormPoluch fp = new FormPoluch();
+                        fp.Show();
+                        this.Close();
+                        break;
 
                 }
+
             }
               
         }

@@ -101,17 +101,53 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormA.Designer.cs">
+      <DependentUpon>FormA.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormC.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormC.Designer.cs">
       <DependentUpon>FormC.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCView.Designer.cs">
+      <DependentUpon>FormCView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDeliv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeliv.Designer.cs">
+      <DependentUpon>FormDeliv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGruz1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGruz1.Designer.cs">
+      <DependentUpon>FormGruz1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGruz2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGruz2.Designer.cs">
+      <DependentUpon>FormGruz2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormOrder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormOrder.Designer.cs">
       <DependentUpon>FormOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPoluch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPoluch.Designer.cs">
+      <DependentUpon>FormPoluch.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,11 +161,29 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormA.resx">
+      <DependentUpon>FormA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormC.resx">
       <DependentUpon>FormC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormCView.resx">
+      <DependentUpon>FormCView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeliv.resx">
+      <DependentUpon>FormDeliv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGruz1.resx">
+      <DependentUpon>FormGruz1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGruz2.resx">
+      <DependentUpon>FormGruz2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormOrder.resx">
       <DependentUpon>FormOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPoluch.resx">
+      <DependentUpon>FormPoluch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
