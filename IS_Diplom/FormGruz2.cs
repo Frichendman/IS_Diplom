@@ -24,7 +24,7 @@ namespace IS_Diplom
         {
             SqlConnection db = new SqlConnection();
             db.openConn();
-            NpgsqlCommand cmnd = new NpgsqlCommand("Select * from public.\"Order\" where status=@st", db.getConnection());
+            NpgsqlCommand cmnd = new NpgsqlCommand("Select name,name_prod,typ,status from public.\"Order\" where status=@st", db.getConnection());
 
             cmnd.Parameters.Add("@st", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "Ожидание разгрузки";
 

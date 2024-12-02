@@ -46,7 +46,7 @@ namespace IS_Diplom
         {
             SqlConnection db = new SqlConnection();
             db.openConn();
-            NpgsqlCommand cmnd = new NpgsqlCommand("Select * from public.\"Transport\" where type=@typ and weight >= @weight and capacity >= @cpct", db.getConnection());
+            NpgsqlCommand cmnd = new NpgsqlCommand("Select name as Наименование,type,weight,capacity,variant,cost from public.\"Transport\" where type=@typ and weight >= @weight and capacity >= @cpct", db.getConnection());
 
             cmnd.Parameters.Add("@typ", NpgsqlTypes.NpgsqlDbType.Varchar).Value = t;
             cmnd.Parameters.Add("@weight", NpgsqlTypes.NpgsqlDbType.Double).Value = w;

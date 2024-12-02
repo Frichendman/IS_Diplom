@@ -23,9 +23,9 @@ namespace IS_Diplom
         {
             SqlConnection db = new SqlConnection();
             db.openConn();
-            NpgsqlCommand cmnd = new NpgsqlCommand("Select * from public.\"Order\" where name=@nam", db.getConnection());
+            NpgsqlCommand cmnd = new NpgsqlCommand("Select name,name_prod,typ,status from public.\"Order\" where name=@nam", db.getConnection());
 
-            cmnd.Parameters.Add("@nam", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "321";
+            cmnd.Parameters.Add("@nam", NpgsqlTypes.NpgsqlDbType.Varchar).Value = "Андрей";
             
 
             cmnd.Connection = db.getConnection();
