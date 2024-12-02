@@ -67,8 +67,20 @@ namespace IS_Diplom
             db.openConn();
             if (cmnd.ExecuteNonQuery() == 1)
             {
+
+                NpgsqlCommand cmnd2 = new NpgsqlCommand("Select id from public.\"Order\" where name = @nameo and name_prod = @nameop", db.getConnection());
+                cmnd2.Parameters.Add("@nameo", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox1.Text;
+                cmnd2.Parameters.Add("@nameop", NpgsqlTypes.NpgsqlDbType.Varchar).Value = textBox2.Text;
+
+                string numb = cmnd2.ExecuteScalar().ToString(); 
+
+                NpgsqlCommand cmnd3 = new NpgsqlCommand("Update public.\"Waypoints\" set order_id=@ido where order_id is null", db.getConnection());
+                cmnd3.Parameters.Add("@ido", NpgsqlTypes.NpgsqlDbType.Integer).Value = int.Parse(numb);
                 MessageBox.Show("Заказ сделан");
                 db.closeConn();
+                FormC fc = new FormC();
+                fc.Show();
+                this.Close();
             }
             else
             {
@@ -161,6 +173,7 @@ namespace IS_Diplom
                         namet = dr.GetFieldValue<string>(1);
                         textBox7.Text = namet;
                         costt = dr.GetFieldValue<double>(2);
+                        label10.Text = costt.ToString();
                     }
                    
                     db.closeConn();
@@ -221,6 +234,7 @@ namespace IS_Diplom
                 idt = ReturnTrnsp.idtr;
                 costt = ReturnTrnsp.cst;
                 textBox7.Text = ReturnTrnsp.nm;
+                label10.Text = costt.ToString();
 
             }
             
