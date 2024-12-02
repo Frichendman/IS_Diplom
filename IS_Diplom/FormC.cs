@@ -23,5 +23,12 @@ namespace IS_Diplom
             fc.Show();
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormCView fcv = new FormCView();
+            fcv.Show();
+            this.Close();
+        }
     }
 }

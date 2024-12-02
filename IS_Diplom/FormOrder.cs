@@ -240,6 +240,11 @@ namespace IS_Diplom
             
         }
 
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
